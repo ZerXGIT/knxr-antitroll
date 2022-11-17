@@ -65,10 +65,6 @@ function startAntiTroll()
         SetPlayerCanDoDriveBy(PlayerId(), false)
     end
 
-    if Config.DisableShooting then
-        SetPlayerCanUseWeapon(PlayerId(), false)
-    end
-
     if Config.DisablePunching then
         CreateThread(function()
             while hasProtection do
@@ -84,7 +80,7 @@ function startAntiTroll()
         CreateThread(function()
             while hasProtection do
                 Wait(5)
-                DisablePlayerFiring(player,true) 
+                DisablePlayerFiring(player, true) 
             end
         end)
     end
@@ -106,10 +102,6 @@ function stopAntiTroll()
     -- Anti Driveby
     if not Config.DriveBy then
         SetPlayerCanDoDriveBy(PlayerId(), true)
-    end
-
-    if Config.DisableShooting then
-        SetPlayerCanUseWeapon(PlayerId(), true)
     end
 
     if Config.DisablePunching then
