@@ -1,6 +1,6 @@
 # knxr-antitroll
 
-
+![Image](https://i.imgur.com/ugH2X8D.png)
 
 ## Features
 (For Players that have antitroll enabled)
