@@ -7,9 +7,6 @@ timeToSafe = Config.TimeToSave
 RegisterNetEvent("knxr-antitroll:toggle", function(toggle, timeOverride)
     hasProtection = toggle or not hasProtection
     timeLeft = timeOverride or Config.HowLong
-    
-    print("Protection: " .. tostring(hasProtection))
-    print("Time left: " .. timeLeft)
 
     if hasProtection then
         startAntiTroll()

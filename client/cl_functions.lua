@@ -36,7 +36,7 @@ function startTimer()
 
             if timeLeft <= 0 then
                 stopAntiTroll()
-                print("AntiTroll stopped!")
+                isTimerInstance = false
                 return
             end
 
@@ -44,9 +44,8 @@ function startTimer()
 
             
             updateUiTime(timeLeft)
-            Wait(1000)
+            Wait(1000 * 60)
         end
-        isTimerInstance = false
     end)
 end
 

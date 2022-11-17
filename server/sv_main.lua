@@ -122,9 +122,9 @@ RegisterNetEvent("knxr-antitroll:onjoin", function(isNew)
     local time = getTimeLeft(identifier)
 
     if time > 0 then
-        print("return")
         target.triggerEvent("knxr-antitroll:toggle", true, time)
         return
     end
+    
     updateOrInsert(identifier, time)
 end)
