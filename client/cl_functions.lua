@@ -65,7 +65,11 @@ function startAntiTroll()
         SetPlayerCanDoDriveBy(PlayerId(), false)
     end
 
-    if Config.DisablePunshing then
+    if Config.DisableShooting then
+        SetPlayerCanUseWeapon(PlayerId(), false)
+    end
+
+    if Config.DisablePunching then
         CreateThread(function()
             while hasProtection do
                 Wait(5)
@@ -76,7 +80,16 @@ function startAntiTroll()
         end)
     end
 
-    if Config.DisablePunshingDamage then
+    if Config.DisableShooting then
+        CreateThread(function()
+            while hasProtection do
+                Wait(5)
+                DisablePlayerFiring(player,true) 
+            end
+        end)
+    end
+
+    if Config.DisablePunchingDamage then
         SetWeaponDamageModifier(-1569615261, 0.0)
     end
 end
@@ -95,13 +108,17 @@ function stopAntiTroll()
         SetPlayerCanDoDriveBy(PlayerId(), true)
     end
 
-    if Config.DisablePunshing then
+    if Config.DisableShooting then
+        SetPlayerCanUseWeapon(PlayerId(), true)
+    end
+
+    if Config.DisablePunching then
         EnableControlAction(0, 140, true)
         EnableControlAction(0, 141, true)
         EnableControlAction(0, 142, true)
     end
 
-    if Config.DisablePunshingDamage then
+    if Config.DisablePunchingDamage then
         SetWeaponDamageModifier(-1569615261, 1.0)
     end
     setUiShow(false)
