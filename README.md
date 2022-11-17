@@ -6,7 +6,7 @@
 - Admin Command to Toggle antitroll: /troll <id>
 - AntiVDM 
 - Disable DriveBy
-- Disable Punshing / Disable Punshing Damage
+- Disable Punching / Disable Punching Damage
 
 ## Installation
 - Downloaded!
