@@ -1,3 +1,12 @@
+-- old esx Support
+if not ESX then
+    ESX = nil
+    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    while ESX == nil do
+        Citizen.Wait(0)
+    end
+end
+
 hasProtection = false
 timeLeft = 0
 

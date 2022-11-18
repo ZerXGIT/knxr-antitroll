@@ -1,3 +1,12 @@
+-- old esx Support
+if not ESX then
+    ESX = nil
+    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    while ESX == nil do
+        Citizen.Wait(0)
+    end
+end
+
 -- Types: info (default), error, warning
 local function cPrint(string, type)
     if type == "error" then
