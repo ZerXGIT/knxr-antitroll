@@ -23,6 +23,8 @@ files {
 
 server_scripts {
     "@oxmysql/lib/MySQL.lua",
+    "server/sv_tests.lua",
+    "server/sv_functions.lua",
     "server/sv_main.lua",
     "sv_config.lua",
 }

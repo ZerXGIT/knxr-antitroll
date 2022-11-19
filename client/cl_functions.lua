@@ -1,4 +1,5 @@
 local isTimerInstance = false
+
 function setUiShow(bool)
     SendNUIMessage({
         type = "show",
