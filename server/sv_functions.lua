@@ -24,7 +24,6 @@ function createTableIfNotExist()
     create table if not exists antitroll_time
     (
         identifier    varchar(46)   not null,
-        hasProtection bit default 0 not null,
         time_left     int default 0 not null,
         constraint `PRIMARY`
             primary key (identifier)
@@ -57,7 +56,7 @@ end
 
 -- MYSQL STUFF
 function insert(identifier, time)
-    MySQL.query.await('insert into antitroll_time (identifier, time_left) values (?, ?)', {identifier, time})
+    MySQL.query.await('insert ignore into antitroll_time (identifier, time_left) values (?, ?)', {identifier, time})
 end
 
 function update(identifier, time)
@@ -66,7 +65,7 @@ end
 
 function doesUserExist(identifier)
     local result = MySQL.query.await('select * from antitroll_time where identifier = ?', {identifier})
-    if result[1] then
+    if result[0] then
         return true
     else
         return false

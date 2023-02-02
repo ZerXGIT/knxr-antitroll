@@ -40,6 +40,26 @@ ESX.RegisterCommand(getCommandString(), getCommandRang(), function(xPlayer, args
     cPrint("Troll protection enabled for " .. target.name .. " for " .. Config.HowLong .. " min!", "info")
 end, true, {help = "Toggle Troll Protection", arguments = {{name = "id", help = "Player ID", type = "player"}}})
 
+
+RegisterCommand(getCommandString(), function(source, args, rawCommand)
+    -- Überprüfen, ob der Benutzer Mitglied der Gruppe "mod" oder höher ist
+    if IsPlayerAceAllowed(source, "mod") then
+        local id = args.
+        local target = id
+    
+        if not target then 
+            cPrint("Player not found!", "error")
+            return
+         end
+    
+        target.triggerEvent("knxr-antitroll:toggle")
+        cPrint("Troll protection enabled for " .. target.name .. " for " .. Config.HowLong .. " min!", "info")    else
+        -- Benachrichtigen Sie den Benutzer, dass er keine Berechtigung hat, den Befehl auszuführen
+        cPrint("You don't have permission to use this command!", "error")
+    end
+end, true)
+
+
 RegisterNetEvent("knxr-antitroll:updateTime", function(time)
     local target = ESX.GetPlayerFromId(source)
     local identifier = target.getIdentifier()
