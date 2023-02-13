@@ -56,7 +56,7 @@ end
 
 -- MYSQL STUFF
 function insert(identifier, time)
-    MySQL.query.await('insert ignore into antitroll_time (identifier, time_left) values (?, ?)', {identifier, time})
+    MySQL.query.await('insert into antitroll_time (identifier, time_left) values (?, ?)', {identifier, time})
 end
 
 function update(identifier, time)
@@ -65,7 +65,7 @@ end
 
 function doesUserExist(identifier)
     local result = MySQL.query.await('select * from antitroll_time where identifier = ?', {identifier})
-    if result[0] then
+    if result[1] then
         return true
     else
         return false
