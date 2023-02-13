@@ -7,7 +7,7 @@ print([[^1
 ^0---------------------[^2Tests^0]---------------------]])
 
 
-    -- old esx Support
+-- old esx Support
 if not ESX then
     ESX = nil
     TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -34,7 +34,7 @@ ESX.RegisterCommand(getCommandString(), getCommandRang(), function(xPlayer, args
     if not target then 
         cPrint("Player not found!", "error")
         return
-     end
+    end
 
     target.triggerEvent("knxr-antitroll:toggle")
     cPrint("Troll protection enabled for " .. target.name .. " for " .. Config.HowLong .. " min!", "info")
