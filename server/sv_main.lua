@@ -27,35 +27,38 @@ end
 
 createTableIfNotExist()
 
-ESX.RegisterCommand(getCommandString(), getCommandRang(), function(xPlayer, args, showError)
-    local id = args.id
-    local target = id
-
-    if not target then 
-        cPrint("Player not found!", "error")
-        return
-    end
-
-    target.triggerEvent("knxr-antitroll:toggle")
-    cPrint("Troll protection enabled for " .. target.name .. " for " .. Config.HowLong .. " min!", "info")
-end, true, {help = "Toggle Troll Protection", arguments = {{name = "id", help = "Player ID", type = "player"}}})
-
-
-RegisterCommand(getCommandString(), function(source, args, rawCommand)
-    if IsPlayerAceAllowed(source, "mod") then
+if ESX.RegisterCommand then
+    ESX.RegisterCommand(getCommandString(), getCommandRang(), function(xPlayer, args, showError)
         local id = args.id
         local target = id
-    
+
         if not target then 
             cPrint("Player not found!", "error")
             return
         end
-    
+
         target.triggerEvent("knxr-antitroll:toggle")
-        cPrint("Troll protection enabled for " .. target.name .. " for " .. Config.HowLong .. " min!", "info")    else
-        cPrint("You don't have permission to use this command!", "error")
-    end
-end, true)
+        cPrint("Troll protection enabled for " .. target.name .. " for " .. Config.HowLong .. " min!", "info")
+    end, true, {help = "Toggle Troll Protection", arguments = {{name = "id", help = "Player ID", type = "player"}}})
+else
+    RegisterCommand(getCommandString(), function(source, args, rawCommand)
+        if IsPlayerAceAllowed(source, getCommandRang()) then
+            local id = args.id
+            local target = id
+        
+            if not target then 
+                cPrint("Player not found!", "error")
+                return
+            end
+        
+            target.triggerEvent("knxr-antitroll:toggle")
+            cPrint("Troll protection enabled for " .. target.name .. " for " .. Config.HowLong .. " min!", "info")    else
+            cPrint("You don't have permission to use this command!", "error")
+        end
+    end, true)
+end
+
+
 
 
 RegisterNetEvent("knxr-antitroll:updateTime", function(time)
