@@ -1,7 +1,6 @@
 fx_version "cerulean"
 games { "gta5" }
 lua54 "yes"
-shared_script "@es_extended/imports.lua"
 
 ui_page "ui/ui.html"
 
@@ -26,11 +25,9 @@ server_scripts {
     "server/sv_tests.lua",
     "server/sv_functions.lua",
     "server/sv_main.lua",
-    "sv_config.lua",
 }
 
 -- Dependencies
 dependencies {
-    "es_extended",
     "oxmysql",
 }

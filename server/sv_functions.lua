@@ -23,7 +23,7 @@ function createTableIfNotExist()
     MySQL.query([[
     create table if not exists antitroll_time
     (
-        identifier    varchar(46)   not null,
+        identifier    varchar(255)   not null,
         time_left     int default 0 not null,
         constraint `PRIMARY`
             primary key (identifier)
@@ -42,7 +42,7 @@ function getCommandString()
         return "troll"
     else
         return string.lower(Config.AdminCommand)
-    end 
+    end
 end
 
 function getCommandRang()
@@ -51,20 +51,20 @@ function getCommandRang()
         return "admin"
     else
         return Config.Rang
-    end 
+    end
 end
 
 -- MYSQL STUFF
 function insert(identifier, time)
-    MySQL.query.await('insert into antitroll_time (identifier, time_left) values (?, ?)', {identifier, time})
+    MySQL.query.await('INSERT IGNORE INTO antitroll_time (identifier, time_left) VALUES (?, ?)', { identifier, time })
 end
 
 function update(identifier, time)
-    MySQL.query.await('update antitroll_time set time_left = ? where identifier = ?', {time, identifier})
+    MySQL.query.await('update antitroll_time set time_left = ? where identifier = ?', { time, identifier })
 end
 
 function doesUserExist(identifier)
-    local result = MySQL.query.await('select * from antitroll_time where identifier = ?', {identifier})
+    local result = MySQL.query.await('select * from antitroll_time where identifier = ?', { identifier })
     if result[1] then
         return true
     else
@@ -72,8 +72,17 @@ function doesUserExist(identifier)
     end
 end
 
+function isNewPlayer(identifier)
+    local result = MySQL.query.await('select * from antitroll_time where identifier = ?', { identifier })
+    if result[1] then
+        return false
+    else
+        return true
+    end
+end
+
 function getTimeLeft(identifier)
-    local result = MySQL.query.await('select * from antitroll_time where identifier = ?', {identifier})
+    local result = MySQL.query.await('select * from antitroll_time where identifier = ?', { identifier })
 
     if result[1] then
         return result[1].time_left

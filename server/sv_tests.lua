@@ -16,8 +16,8 @@ function tests.checkForConfig()
     end
 end
 
-function tests.checkForESX()
-    if ESX then
+function tests.checkForFramework()
+    if GetFrameworkObject() then
         return true
     else
         return false

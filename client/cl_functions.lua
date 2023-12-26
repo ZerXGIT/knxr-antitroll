@@ -1,4 +1,5 @@
 local isTimerInstance = false
+local isTimerRunning = false -- flag variable to control the Timer thread
 
 function setUiShow(bool)
     SendNUIMessage({
@@ -25,8 +26,8 @@ function startTimer()
 
     CreateThread(function()
         isTimerInstance = true
+        isTimerRunning = true -- start the Timer thread
         while hasProtection do
-
             if interval == timeToSafe or timeLeft <= 0 then
                 interval = 0
                 setUiShow(true)
@@ -43,10 +44,10 @@ function startTimer()
 
             timeLeft = timeLeft - 1
 
-            
             updateUiTime(timeLeft)
             Wait(1000 * 60)
         end
+        isTimerRunning = false -- stop the Timer thread
     end)
 end
 
@@ -81,7 +82,7 @@ function startAntiTroll()
         CreateThread(function()
             while hasProtection do
                 Wait(5)
-                DisablePlayerFiring(player, true) 
+                DisablePlayerFiring(player, true)
             end
         end)
     end
@@ -94,6 +95,8 @@ end
 function stopAntiTroll()
     hasProtection = false
     timeLeft = 0
+
+    isTimerInstance = false
 
     -- Anti VDM
     if Config.DisableVDM then
@@ -115,4 +118,5 @@ function stopAntiTroll()
         SetWeaponDamageModifier(-1569615261, 1.0)
     end
     setUiShow(false)
+    isTimerRunning = false -- stop the Timer thread
 end
